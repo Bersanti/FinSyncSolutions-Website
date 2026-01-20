@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+  // Dynamic <base> so this site works on:
+  // - Custom domains (e.g., https://finsyncsolutions.org)
+  // - GitHub Pages project URLs (e.g., https://username.github.io/repo/)
+  (function () {
+    var host = location.hostname || "";
+    var isGitHub = host.endsWith("github.io");
+    var parts = (location.pathname || "/").split("/").filter(Boolean);
+    var repo = (isGitHub && parts.length) ? parts[0] : "";
+    var base = document.createElement("base");
+    base.href = (isGitHub && repo) ? ("/" + repo + "/") : "/";
+    document.head.appendChild(base);
+  })();
+</script>
+  <title>FinSync Solutions | Modern bookkeeping & financial clarity</title>
+  <meta name="description" content="FinSync Solutions is a modern bookkeeping partner built for business owners who want clean books, clear reporting, and confident decisions.">
+  <link rel="canonical" href="https://finsyncsolutions.org/">
+  <meta name="theme-color" content="#05070d">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FinSync Solutions | Modern bookkeeping & financial clarity">
+  <meta property="og:description" content="FinSync Solutions is a modern bookkeeping partner built for business owners who want clean books, clear reporting, and confident decisions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://finsyncsolutions.org/">
+  <meta property="og:image" content="https://finsyncsolutions.org/assets/img/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/icons/favicon-16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Fonts (2 families max) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "FinSync Solutions",
+      "url": "https://finsyncsolutions.org/",
+      "logo": "https://finsyncsolutions.org/assets/img/logo-blue-dark.png",
+      "email": "curtis@finsyncsolutions.org"
+    },
+    {
+      "@type": "WebSite",
+      "name": "FinSync Solutions",
+      "url": "https://finsyncsolutions.org/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://finsyncsolutions.org/",
+      "name": "FinSync Solutions",
+      "isPartOf": {
+        "@id": "https://finsyncsolutions.org/"
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+  <div class="container header__inner">
+    <a class="brand" href="./">
+      <img class="brand__mark" src="assets/img/mark-blue.png" alt="" width="42" height="50">
+      <span class="brand__text">
+        <span class="brand__name">FinSync</span>
+        <span class="brand__sub">Solutions</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a class="nav-link" href="./">Home</a>
+      <a class="nav-link" href="services/">Services</a>
+      <a class="nav-link" href="pricing/">Pricing</a>
+      <a class="nav-link" href="purpose/">Purpose</a>
+      <a class="nav-link" href="about/">About</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--primary btn--sm" href="#contact">
+        <span class="btn__label">Get a quote</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" data-mobile-nav aria-hidden="true">
+    <div class="mobile-nav__panel" role="dialog" aria-label="Mobile menu">
+      <a href="./">Home</a>
+      <a href="services/">Services</a>
+      <a href="pricing/">Pricing</a>
+      <a href="purpose/">Purpose</a>
+      <a href="about/">About</a>
+      <div class="mobile-cta">
+        <a class="btn btn--primary" href="#contact">
+          <span class="btn__label">Get a quote</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <div class="hero__grid">
+          <div>
+            <div class="kicker">Bookkeeping • Reporting • Business clarity</div>
+            <h1>Financials that stay in sync — so you can lead with confidence.</h1>
+            <p class="hero__lead">
+              FinSync Solutions is a modern bookkeeping partner with strong business acumen and tech-forward execution.
+              We keep your books clean, your close consistent, and your reporting easy to act on.
+            </p>
+
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#contact">
+                <span class="btn__label">Get a quote</span>
+              </a>
+              <a class="btn btn--ghost" href="services/">
+                <span class="btn__label">Explore services</span>
+              </a>
+            </div>
+
+            <div class="hero__badges" aria-label="Highlights">
+              <span class="badge"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l7 4v6c0 5-3.1 9.4-7 10-3.9-.6-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Secure by design</span>
+              <span class="badge"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10z" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Consistent close</span>
+              <span class="badge"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 19h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 14l3-3 3 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Clear reporting</span>
+            </div>
+          </div>
+
+          <aside class="hero__panel">
+            <h3>What you’ll get</h3>
+            <ul class="panel-list">
+              <li>Reconciled accounts and tidy books</li>
+              <li>Monthly close + plain-English summary</li>
+              <li>Simple dashboards and trend visibility</li>
+              <li>Fast, reliable communication</li>
+              <li>Direct access to Curtis &amp; Murad</li>
+            </ul>
+
+            <div class="panel-callout">
+              <strong>Quick lead:</strong> drop your email and a note — we’ll follow up within 1 business day.
+            </div>
+
+            <div style="margin-top: 14px;">
+              <form class="form js-lead-form" method="POST" novalidate>
+  <div class="field">
+    <label for="hero-email">Email <span class="small">(required)</span></label>
+    <input class="input" type="email" id="hero-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+    <div class="error" aria-live="polite"></div>
+  </div>
+
+  <div class="field">
+    <label for="hero-notes">Note <span class="small">(optional)</span></label>
+    <textarea class="textarea" id="hero-notes" name="notes" placeholder="What do you need help with?"></textarea>
+    <div class="error" aria-live="polite"></div>
+  </div>
+
+  <!-- Honeypot -->
+  <div class="field" style="position:absolute;left:-5000px;" aria-hidden="true">
+    <label for="hero-website">Website</label>
+    <input class="input" type="text" name="website" id="hero-website" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn--primary" type="submit">
+      <span class="btn__spinner" aria-hidden="true"></span>
+      <span class="btn__label">Send</span>
+    </button>
+    <div class="privacy">Or email <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a> or <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a></div>
+  </div>
+
+  <div class="form-status" data-form-status role="status" aria-live="polite">
+    Send a note — we’ll reply within 1 business day.
+  </div>
+</form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <div class="kicker">Services</div>
+        <h2>Built for operational clarity</h2>
+        <p class="muted">Bookkeeping is the foundation. We make the output usable — statements, dashboards, and a short monthly summary.</p>
+
+        <div class="grid grid--3" style="margin-top: 18px;">
+          <div class="card">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.2 4.6L18 8l-4.8 1.4L12 14l-1.2-4.6L6 8l4.8-1.4L12 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M19 14l.7 2.6L22 17l-2.3.4L19 20l-.7-2.6L16 17l2.3-.4L19 14z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+            <h3>Monthly bookkeeping</h3>
+            <p>Accurate categorization, reconciliations, and a close you can trust — month after month.</p>
+          </div>
+          <div class="card card--highlight">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 19h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 14l3-3 3 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Reporting & insights</h3>
+            <p>Financial statements that make sense, plus simple visibility into trends and performance.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12l2-2a3 3 0 0 1 4 0l1 1a3 3 0 0 0 4 0l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 14l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M22 14l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Cleanup & catch-up</h3>
+            <p>Behind on bookkeeping? We’ll help you get current and put a repeatable process in place.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <a class="btn btn--ghost" href="services/">
+            <span class="btn__label">View all services</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="kicker">How it works</div>
+        <h2>A simple, repeatable process</h2>
+        <p class="muted">Simple steps. Strong communication. Dependable output.</p>
+
+        <div class="grid grid--3" style="margin-top: 18px;">
+          <div class="card">
+            <h3>1) Connect</h3>
+            <p>We collect the essentials (accounts, statements, access) and align on your reporting needs.</p>
+          </div>
+          <div class="card">
+            <h3>2) Close</h3>
+            <p>We reconcile and close on a consistent cadence with quality checks and documentation.</p>
+          </div>
+          <div class="card">
+            <h3>3) Review</h3>
+            <p>You get statements and a summary of what changed — plus next-step recommendations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="kicker">Contact</div>
+        <h2>Let’s talk</h2>
+        <p class="muted">Share what you’re looking for — we’ll respond within 1 business day.</p>
+
+        <div class="card" style="margin-top: 18px;">
+          <form class="form js-lead-form" method="POST" novalidate>
+  <div class="form-row">
+    <div class="field">
+      <label for="contact-name">Name <span class="small">(optional)</span></label>
+      <input class="input" id="contact-name" name="name" placeholder="Jane Doe" autocomplete="name">
+      <div class="error" aria-live="polite"></div>
+    </div>
+
+    <div class="field">
+      <label for="contact-email">Email <span class="small">(required)</span></label>
+      <input class="input" type="email" id="contact-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+      <div class="error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="contact-phone">Phone <span class="small">(optional)</span></label>
+      <input class="input" type="tel" id="contact-phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
+      <div class="error" aria-live="polite"></div>
+    </div>
+
+    <div class="field">
+      <label for="contact-company">Company <span class="small">(optional)</span></label>
+      <input class="input" id="contact-company" name="company" placeholder="Company LLC" autocomplete="organization">
+      <div class="error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="contact-notes">Notes <span class="small">(optional)</span></label>
+    <textarea class="textarea" id="contact-notes" name="notes" placeholder="Tell us what you need help with (bookkeeping, cleanup, monthly close, reporting, etc.)"></textarea>
+    <div class="error" aria-live="polite"></div>
+    <div class="hint">No sensitive information, please.</div>
+  </div>
+
+  <!-- Honeypot -->
+  <div class="field" style="position:absolute;left:-5000px;" aria-hidden="true">
+    <label for="contact-website">Website</label>
+    <input class="input" type="text" name="website" id="contact-website" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn--primary" type="submit">
+      <span class="btn__spinner" aria-hidden="true"></span>
+      <span class="btn__label">Send</span>
+    </button>
+    <div class="privacy">We’ll reply by email. Or email <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a> or <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a>.</div>
+  </div>
+
+  <div class="form-status" data-form-status role="status" aria-live="polite">
+    Enter your email and we’ll reach out.
+  </div>
+</form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/img/mark-blue.png" alt="" width="44" height="52">
+          <div>
+            <div style="font-family: var(--font-heading); font-weight: 700;">FinSync Solutions</div>
+            <div class="small">Bookkeeping & business clarity</div>
+          </div>
+        </div>
+        <p class="footer__meta">
+          A modern, process-driven bookkeeping partner. Built to keep your numbers clean, your close on time, and your decisions confident.
+        </p>
+      </div>
+
+      <div class="footer__links" aria-label="Footer navigation">
+        <div style="font-weight: 700; margin-bottom: 8px;">Explore</div>
+        <a href="services/">Services</a>
+        <a href="pricing/">Pricing</a>
+        <a href="purpose/">Purpose</a>
+        <a href="about/">About</a>
+      </div>
+
+      <div>
+        <div style="font-weight: 700; margin-bottom: 8px;">Contact</div>
+        <div class="small">Email</div>
+        <div class="footer__email-list">
+          <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a>
+          <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a>
+        </div>
+        <div class="small" style="margin-top: 12px;">We typically respond within 1 business day.</div>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <div>© <span data-year></span> FinSync Solutions</div>
+      <div class="small">Built with a focus on clarity, accessibility, and performance.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 5l-7 7m7-7l7 7M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "FinSync Solutions",
+  "short_name": "FinSync",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05070d",
+  "theme_color": "#05070d",
+  "icons": [
+    {
+      "src": "assets/icons/android-chrome-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/android-chrome-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

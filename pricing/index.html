@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+  // Dynamic <base> so this site works on:
+  // - Custom domains (e.g., https://finsyncsolutions.org)
+  // - GitHub Pages project URLs (e.g., https://username.github.io/repo/)
+  (function () {
+    var host = location.hostname || "";
+    var isGitHub = host.endsWith("github.io");
+    var parts = (location.pathname || "/").split("/").filter(Boolean);
+    var repo = (isGitHub && parts.length) ? parts[0] : "";
+    var base = document.createElement("base");
+    base.href = (isGitHub && repo) ? ("/" + repo + "/") : "/";
+    document.head.appendChild(base);
+  })();
+</script>
+  <title>Pricing | FinSync Solutions</title>
+  <meta name="description" content="Simple, package-based bookkeeping pricing. Request a quote and get a clear monthly rate based on volume and complexity.">
+  <link rel="canonical" href="https://finsyncsolutions.org/pricing/">
+  <meta name="theme-color" content="#05070d">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pricing | FinSync Solutions">
+  <meta property="og:description" content="Simple, package-based bookkeeping pricing. Request a quote and get a clear monthly rate based on volume and complexity.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://finsyncsolutions.org/pricing/">
+  <meta property="og:image" content="https://finsyncsolutions.org/assets/img/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/icons/favicon-16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Fonts (2 families max) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "FinSync Solutions",
+      "url": "https://finsyncsolutions.org/",
+      "logo": "https://finsyncsolutions.org/assets/img/logo-blue-dark.png",
+      "email": "curtis@finsyncsolutions.org"
+    },
+    {
+      "@type": "WebSite",
+      "name": "FinSync Solutions",
+      "url": "https://finsyncsolutions.org/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://finsyncsolutions.org/pricing/",
+      "name": "FinSync Solutions",
+      "isPartOf": {
+        "@id": "https://finsyncsolutions.org/"
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+  <div class="container header__inner">
+    <a class="brand" href="./">
+      <img class="brand__mark" src="assets/img/mark-blue.png" alt="" width="42" height="50">
+      <span class="brand__text">
+        <span class="brand__name">FinSync</span>
+        <span class="brand__sub">Solutions</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a class="nav-link" href="./">Home</a>
+      <a class="nav-link" href="services/">Services</a>
+      <a class="nav-link" href="pricing/">Pricing</a>
+      <a class="nav-link" href="purpose/">Purpose</a>
+      <a class="nav-link" href="about/">About</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--primary btn--sm" href="#contact">
+        <span class="btn__label">Get a quote</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" data-mobile-nav aria-hidden="true">
+    <div class="mobile-nav__panel" role="dialog" aria-label="Mobile menu">
+      <a href="./">Home</a>
+      <a href="services/">Services</a>
+      <a href="pricing/">Pricing</a>
+      <a href="purpose/">Purpose</a>
+      <a href="about/">About</a>
+      <div class="mobile-cta">
+        <a class="btn btn--primary" href="#contact">
+          <span class="btn__label">Get a quote</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+  
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__inner">
+        <div class="breadcrumb"><a href="./">Home</a> / Pricing</div>
+        <h1>Pricing</h1>
+        <p class="muted">
+          Clear monthly packages for most businesses. If your volume or complexity is unusually high, we’ll quote a custom scope.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="kicker">Monthly packages</div>
+      <h2>Pick the level of support you need</h2>
+      <p class="muted">Pick a package and send a quick note. We’ll confirm fit and next steps.</p>
+
+      <div class="pricing" style="margin-top: 18px;">
+        <div class="card">
+          <div class="kicker">Essentials</div>
+          <div class="price">$399 <small>/ month</small></div>
+          <p class="muted">For steady operations that need reliable monthly books.</p>
+          <ul class="features">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Monthly bookkeeping & reconciliations</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Month-end close</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>P&L + Balance Sheet</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Email support</span></li>
+          </ul>
+          <div style="margin-top: 16px;">
+            <a class="btn btn--primary" href="#contact"><span class="btn__label">Get a quote</span></a>
+          </div>
+        </div>
+
+        <div class="card card--highlight">
+          <div class="kicker">Growth</div>
+          <div class="price">$699 <small>/ month</small></div>
+          <p class="muted">More complexity, more visibility, more proactive support.</p>
+          <ul class="features">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Essentials</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Trend review & summary</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>KPI dashboard + cash flow snapshot</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority support</span></li>
+          </ul>
+          <div style="margin-top: 16px;">
+            <a class="btn btn--primary" href="#contact"><span class="btn__label">Get a quote</span></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kicker">Scale</div>
+          <div class="price">$1,299 <small>/ month</small></div>
+          <p class="muted">For teams that want tighter controls and faster insight.</p>
+          <ul class="features">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Growth</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Process documentation & close checklist</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom reporting needs</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Monthly review call (optional)</span></li>
+          </ul>
+          <div style="margin-top: 16px;">
+            <a class="btn btn--primary" href="#contact"><span class="btn__label">Get a quote</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="kicker">One-time work</div>
+      <h2>Cleanup / catch-up</h2>
+      <p class="muted">
+        If your books are behind or messy, we can help you get current before moving into ongoing monthly support.
+        One-time scope depends heavily on how far behind you are and what needs to be corrected.
+      </p>
+
+      <div class="grid grid--2" style="margin-top: 18px;">
+        <div class="card">
+          <h3>What affects price</h3>
+          <ul class="features">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Monthly transaction volume</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span># of bank/credit accounts</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span># of entities or locations</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Quality of existing categorization</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What you’ll receive</h3>
+          <ul class="features">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reconciled accounts</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Corrected categorization</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Updated financial statements</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Recommendation for ongoing process</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="kicker">Next steps</div>
+      <h2>Want an exact quote?</h2>
+      <p class="muted">Send your email and a short note about your business — we’ll reply with next steps.</p>
+      <a class="btn btn--primary" href="#contact"><span class="btn__label">Contact us</span></a>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="kicker">Contact</div>
+      <h2>Request pricing</h2>
+      <p class="muted">A few details help us respond with a clear quote.</p>
+
+      <div class="card" style="margin-top: 18px;">
+        <form class="form js-lead-form" method="POST" novalidate>
+  <div class="form-row">
+    <div class="field">
+      <label for="contact-name">Name <span class="small">(optional)</span></label>
+      <input class="input" id="contact-name" name="name" placeholder="Jane Doe" autocomplete="name">
+      <div class="error" aria-live="polite"></div>
+    </div>
+
+    <div class="field">
+      <label for="contact-email">Email <span class="small">(required)</span></label>
+      <input class="input" type="email" id="contact-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+      <div class="error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="contact-phone">Phone <span class="small">(optional)</span></label>
+      <input class="input" type="tel" id="contact-phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
+      <div class="error" aria-live="polite"></div>
+    </div>
+
+    <div class="field">
+      <label for="contact-company">Company <span class="small">(optional)</span></label>
+      <input class="input" id="contact-company" name="company" placeholder="Company LLC" autocomplete="organization">
+      <div class="error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="contact-notes">Notes <span class="small">(optional)</span></label>
+    <textarea class="textarea" id="contact-notes" name="notes" placeholder="Tell us what you need help with (bookkeeping, cleanup, monthly close, reporting, etc.)"></textarea>
+    <div class="error" aria-live="polite"></div>
+    <div class="hint">No sensitive information, please.</div>
+  </div>
+
+  <!-- Honeypot -->
+  <div class="field" style="position:absolute;left:-5000px;" aria-hidden="true">
+    <label for="contact-website">Website</label>
+    <input class="input" type="text" name="website" id="contact-website" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn--primary" type="submit">
+      <span class="btn__spinner" aria-hidden="true"></span>
+      <span class="btn__label">Send</span>
+    </button>
+    <div class="privacy">We’ll reply by email. Or email <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a> or <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a>.</div>
+  </div>
+
+  <div class="form-status" data-form-status role="status" aria-live="polite">
+    Enter your email and we’ll reach out.
+  </div>
+</form>
+      </div>
+    </div>
+  </section>
+</main>
+
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/img/mark-blue.png" alt="" width="44" height="52">
+          <div>
+            <div style="font-family: var(--font-heading); font-weight: 700;">FinSync Solutions</div>
+            <div class="small">Bookkeeping & business clarity</div>
+          </div>
+        </div>
+        <p class="footer__meta">
+          A modern, process-driven bookkeeping partner. Built to keep your numbers clean, your close on time, and your decisions confident.
+        </p>
+      </div>
+
+      <div class="footer__links" aria-label="Footer navigation">
+        <div style="font-weight: 700; margin-bottom: 8px;">Explore</div>
+        <a href="services/">Services</a>
+        <a href="pricing/">Pricing</a>
+        <a href="purpose/">Purpose</a>
+        <a href="about/">About</a>
+      </div>
+
+      <div>
+        <div style="font-weight: 700; margin-bottom: 8px;">Contact</div>
+        <div class="small">Email</div>
+        <div class="footer__email-list">
+          <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a>
+          <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a>
+        </div>
+        <div class="small" style="margin-top: 12px;">We typically respond within 1 business day.</div>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <div>© <span data-year></span> FinSync Solutions</div>
+      <div class="small">Built with a focus on clarity, accessibility, and performance.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 5l-7 7m7-7l7 7M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+</body>
+</html>
