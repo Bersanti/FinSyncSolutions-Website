@@ -16,7 +16,6 @@ const SELECTORS = {
   mobileNav: "[data-mobile-nav]",
   backToTop: "[data-back-to-top]",
   leadForm: ".js-lead-form",
-  downloadForm: ".js-download-form",
 };
 
 function isGitHubPagesProject() {
@@ -162,10 +161,9 @@ function setFormStatus(form, state, message) {
   status.textContent = message;
 }
 
-async function submitToFormspree(form, options = {}) {
+async function submitToFormspree(form) {
   const endpoint = FORMSPREE_ENDPOINT;
   const hasRealEndpoint = endpoint && !endpoint.includes("YOUR_FORM_ID");
-  const disableMailto = !!(options && options.disableMailto);
 
   const formData = new FormData(form);
 
@@ -182,14 +180,7 @@ async function submitToFormspree(form, options = {}) {
   formData.append("submitted_at", new Date().toISOString());
 
   if (!hasRealEndpoint) {
-    // No endpoint yet.
-    // - For lead forms, we fall back to mailto so the form still "works".
-    // - For download gates, we simply unlock the asset without opening an email client.
-    if (disableMailto) {
-      return { ok: true, notCaptured: true };
-    }
-
-    // Lead form fallback: open the user's email client; for automatic emails, configure Formspree.
+    // No endpoint yet — fall back to mailto for now so the form still "works".
     // This will open the user's email client; for automatic emails, configure Formspree.
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
@@ -328,94 +319,10 @@ function initLeadForms() {
   });
 }
 
-
-
-function initDownloadForms() {
-  const forms = document.querySelectorAll(SELECTORS.downloadForm);
-  if (!forms.length) return;
-
-  forms.forEach((form) => {
-    const submitBtn = form.querySelector("button[type='submit']");
-    const emailInput = form.querySelector("[name='email']");
-    const emailField = emailInput ? emailInput.closest(".field") : null;
-    const unlockEl = form.querySelector("[data-download-unlock]");
-
-    // Prefill from localStorage (optional convenience)
-    try {
-      const stored = localStorage.getItem("finsync_email");
-      if (emailInput && stored && !emailInput.value) emailInput.value = stored;
-    } catch (_) {}
-
-    if (emailInput && emailField) {
-      emailInput.addEventListener("input", () => clearFieldError(emailField));
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      if (!emailInput) return;
-
-      if (emailField) clearFieldError(emailField);
-
-      const emailVal = String(emailInput.value || "").trim();
-      if (!emailVal || !isValidEmail(emailVal)) {
-        if (emailField) setFieldError(emailField, "Please enter a valid email address.");
-        emailInput.focus();
-        setFormStatus(form, "error", "Please enter a valid email to unlock the PDF.");
-        return;
-      }
-
-      // Loading UI
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.classList.add("is-loading");
-      }
-      setFormStatus(form, "neutral", "Unlocking…");
-
-      try {
-        const result = await submitToFormspree(form, { disableMailto: true });
-
-        // Store email for convenience (also helps the contact form later)
-        try { localStorage.setItem("finsync_email", emailVal); } catch (_) {}
-
-        if (result.ok) {
-          if (unlockEl) unlockEl.hidden = false;
-
-          // Try to open the PDF in a new tab (some browsers may block this because it's async)
-          try {
-            const path = form.getAttribute("data-download-path");
-            if (path) window.open(new URL(path, document.baseURI).href, "_blank", "noopener");
-          } catch (_) {}
-
-          setFormStatus(
-            form,
-            "success",
-            result.notCaptured
-              ? "Unlocked. (Note: lead capture isn’t configured yet — set your Formspree endpoint to receive emails automatically.)"
-              : "Unlocked. Your download link is ready below."
-          );
-          return;
-        }
-
-        setFormStatus(form, "error", result.errorMsg || "Something went wrong. Please try again.");
-
-      } catch (err) {
-        setFormStatus(form, "error", "Network error. Please try again.");
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.classList.remove("is-loading");
-        }
-      }
-    });
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   setActiveNavLink();
   initMobileNav();
   initBackToTop();
   initLeadForms();
-  initDownloadForms();
   setFooterYear();
 });
