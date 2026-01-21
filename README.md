@@ -7,7 +7,7 @@ Built as a lightweight lead generator + information hub.
 - `/` — Home
 - `/services/` — Services
 - `/pricing/` — Pricing
-- `/purpose/` — Purpose
+- `/reporting/` — Reporting
 - `/about/` — About
 
 ## Features included
@@ -90,6 +90,6 @@ This is a static site, so you can deploy it anywhere:
   - About: `about/index.html`
   - Services: `services/index.html`
   - Pricing: `pricing/index.html`
-  - Purpose: `purpose/index.html`
+  - Reporting: `reporting/index.html`
 - Update pricing tiers: `pricing/index.html`
 - Update colors/typography: `assets/css/styles.css`

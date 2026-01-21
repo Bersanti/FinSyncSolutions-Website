@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+  // Dynamic <base> so this site works on:
+  // - Custom domains (e.g., https://finsyncsolutions.org)
+  // - GitHub Pages project URLs (e.g., https://username.github.io/repo/)
+  (function () {
+    var host = location.hostname || "";
+    var isGitHub = host.endsWith("github.io");
+    var parts = (location.pathname || "/").split("/").filter(Boolean);
+    var repo = (isGitHub && parts.length) ? parts[0] : "";
+    var base = document.createElement("base");
+    base.href = (isGitHub && repo) ? ("/" + repo + "/") : "/";
+    document.head.appendChild(base);
+  })();
+</script>
+  <title>Reporting | FinSync Solutions</title>
+  <meta name="description" content="Operator-grade monthly reporting for small businesses: KPI dashboards, P&L + margin drivers, cash runway, spend analysis, revenue concentration, and clear next steps.">
+  <link rel="canonical" href="https://finsyncsolutions.org/reporting/">
+  <meta name="theme-color" content="#05070d">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Reporting | FinSync Solutions">
+  <meta property="og:description" content="Operator-grade monthly reporting: KPI dashboards, P&L + margin drivers, cash runway, spend analysis, revenue concentration, and clear next steps.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://finsyncsolutions.org/reporting/">
+  <meta property="og:image" content="https://finsyncsolutions.org/assets/img/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/icons/favicon-16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Fonts (2 families max) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "FinSync Solutions",
+      "url": "https://finsyncsolutions.org/",
+      "logo": "https://finsyncsolutions.org/assets/img/logo-blue-dark.png",
+      "email": "curtis@finsyncsolutions.org"
+    },
+    {
+      "@type": "WebSite",
+      "name": "FinSync Solutions",
+      "url": "https://finsyncsolutions.org/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://finsyncsolutions.org/reporting/",
+      "name": "Reporting | FinSync Solutions",
+      "isPartOf": {
+        "@id": "https://finsyncsolutions.org/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://finsyncsolutions.org/"},
+        {"@type":"ListItem","position":2,"name":"Reporting","item":"https://finsyncsolutions.org/reporting/"}
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+  <div class="container header__inner">
+    <a class="brand" href="./">
+      <img class="brand__mark" src="assets/img/mark-blue.png" alt="" width="42" height="50">
+      <span class="brand__text">
+        <span class="brand__name">FinSync</span>
+        <span class="brand__sub">Solutions</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a class="nav-link" href="./">Home</a>
+      <a class="nav-link" href="services/">Services</a>
+      <a class="nav-link" href="pricing/">Pricing</a>
+      <a class="nav-link" href="reporting/">Reporting</a>
+      <a class="nav-link" href="about/">About</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--primary btn--sm" href="#contact">
+        <span class="btn__label">Get a quote</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" data-mobile-nav aria-hidden="true">
+    <div class="mobile-nav__panel" role="dialog" aria-label="Mobile menu">
+      <a href="./">Home</a>
+      <a href="services/">Services</a>
+      <a href="pricing/">Pricing</a>
+      <a href="reporting/">Reporting</a>
+      <a href="about/">About</a>
+      <div class="mobile-cta">
+        <a class="btn btn--primary" href="#contact">
+          <span class="btn__label">Get a quote</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__inner">
+        <div class="breadcrumb"><a href="./">Home</a> / Reporting</div>
+        <h1>Reporting</h1>
+        <p class="muted">
+          Clean books are step one. The differentiator is what you can <em>see</em> and what you can <em>do</em>.
+          We deliver operator-grade reporting that turns raw numbers into decisions.
+        </p>
+
+        <div class="hero__badges" aria-label="Supported accounting tools" style="margin-top: 14px;">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c4.7 0 8 3 8 6.7 0 3.7-3.3 6.7-8 6.7S4 14.4 4 10.7C4 7 7.3 3 12 3Z" stroke="currentColor" stroke-width="2"/><path d="M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            QuickBooks Online
+          </span>
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            Xero
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="grid grid--2" style="grid-template-columns: 1.25fr 0.95fr;">
+        <div class="card card--highlight">
+          <div class="kicker">Sample</div>
+          <h2>Monthly reporting pack (PDF)</h2>
+          <p class="muted">
+            A concise package that answers the questions owners actually ask:
+            what changed, what matters, and what to do next.
+          </p>
+
+          <ul class="features" style="margin-top: 12px;">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Executive summary:</strong> key movements + plain-English takeaways</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>KPI dashboard:</strong> revenue, margin, cash, runway, working-capital signals</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Statements + clarity:</strong> P&amp;L, balance sheet, cash flow</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Drivers:</strong> margin drift, spend variance, revenue concentration</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Action plan:</strong> what to focus on next month</span></li>
+          </ul>
+
+          <div style="margin-top: 16px;">
+            <a class="btn btn--ghost" href="#download"><span class="btn__label">Download the sample pack</span></a>
+            <a class="btn btn--ghost" href="#modules" style="margin-left: 8px;"><span class="btn__label">See reporting modules</span></a>
+          </div>
+        </div>
+
+        <div class="card" id="download">
+          <div class="kicker">Download</div>
+          <h3>Unlock the sample PDF</h3>
+          <p class="muted">Enter your email to download the sample monthly reporting pack.</p>
+
+          <form class="form js-download-form" method="POST" novalidate data-download-path="assets/downloads/FinSync-Sample-Monthly-Reporting-Pack.pdf">
+            <input type="hidden" name="lead_type" value="sample_pack_download">
+            <input type="hidden" name="asset" value="sample_monthly_reporting_pack">
+            <input type="hidden" name="source" value="reporting_page">
+
+            <div class="field">
+              <label for="sample-email">Email <span class="small">(required)</span></label>
+              <input class="input" type="email" id="sample-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+              <div class="error" aria-live="polite"></div>
+            </div>
+
+            <!-- Honeypot -->
+            <div class="field" style="position:absolute;left:-5000px;" aria-hidden="true">
+              <label for="sample-website">Website</label>
+              <input class="input" type="text" name="website" id="sample-website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--primary" type="submit">
+                <span class="btn__spinner" aria-hidden="true"></span>
+                <span class="btn__label">Unlock PDF</span>
+              </button>
+              <div class="privacy">Or email <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a> or <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a></div>
+            </div>
+
+            <div class="form-status" data-form-status role="status" aria-live="polite">
+              We’ll use this to follow up only if you ask for help.
+            </div>
+
+            <div class="download-unlock" data-download-unlock hidden>
+              <div style="margin-top: 12px;">
+                <a class="btn btn--ghost" href="assets/downloads/FinSync-Sample-Monthly-Reporting-Pack.pdf" target="_blank" rel="noopener">
+                  <span class="btn__label">Download / View PDF</span>
+                </a>
+              </div>
+              <div class="small" style="margin-top: 10px; color: var(--muted);">
+                If your browser opens it in a new tab, you can download from there.
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="modules">
+    <div class="container">
+      <div class="kicker">What we deliver</div>
+      <h2>Reporting modules that owners actually use</h2>
+      <p class="muted">
+        Every business is different — but the decision problems are usually the same.
+        We build a pack that fits your model and stays consistent month to month.
+      </p>
+
+      <div class="grid grid--3" style="margin-top: 18px;">
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Executive summary</h3>
+          <p>Plain-English highlights: what moved, what’s normal, what needs attention, and what to do next.</p>
+        </article>
+
+        <article class="card card--highlight">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 19h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 14l3-3 3 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>KPI dashboard</h3>
+          <p>Revenue, margin, net income, cash, runway, DSO, and a short list of weekly “watch metrics.”</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h10v18H7z" stroke="currentColor" stroke-width="2"/><path d="M9 7h6M9 11h6M9 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Clean financial statements</h3>
+          <p>P&amp;L, balance sheet, and cash flow — structured to be readable and consistent as you grow.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18h16M6 18V8m6 10V5m6 13v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Profitability &amp; margin drivers</h3>
+          <p>Trend views and “what changed” breakdowns (mix, pricing, COGS drift, OpEx creep).</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M5 8h14M7 16h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Cash runway &amp; thresholds</h3>
+          <p>Cash balance trend, minimum cash threshold, and stress scenarios so you can plan proactively.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h18M6 7v14m12-14v14M9 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Spend analysis</h3>
+          <p>Variance signals, subscription creep, and vendor concentration — with clean drill-down detail.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l3-3 3 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Revenue quality</h3>
+          <p>Customer / product concentration, trend stability, and risk flags that owners rarely see in basic bookkeeping.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12l2-2a3 3 0 0 1 4 0l1 1a3 3 0 0 0 4 0l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Working capital signals</h3>
+          <p>A/R aging and collections indicators (without you living inside spreadsheets).</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-4.5 7-10V5l-7-3-7 3v6c0 5.5 7 10 7 10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <h3>Controls &amp; consistency</h3>
+          <p>Close checklist, category hygiene, and documentation so reporting stays dependable month after month.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section section--tight" id="preview">
+    <div class="container">
+      <div class="kicker">Preview</div>
+      <h2>A few pages from the pack</h2>
+      <p class="muted">Illustrative examples of the charts and views you’ll get. The real value is the consistency and the commentary behind them.</p>
+
+      <div class="grid grid--3" style="margin-top: 18px;">
+        <article class="card">
+          <h3>Revenue &amp; net income trend</h3>
+          <div class="chart-shell" style="margin-top: 10px;">
+            <img src="assets/downloads/_charts/trend_revenue_net.png" alt="Revenue and net income trend chart (illustrative)">
+            <div class="chart-caption">Quickly see if growth is translating into profit — and whether the trend is stable.</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Cash runway (stress case)</h3>
+          <div class="chart-shell" style="margin-top: 10px;">
+            <img src="assets/downloads/_charts/cash_runway.png" alt="Cash runway chart under a stress scenario (illustrative)">
+            <div class="chart-caption">Know your minimum cash threshold and your runway before you have to react.</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Spend variance heatmap</h3>
+          <div class="chart-shell" style="margin-top: 10px;">
+            <img src="assets/downloads/_charts/expense_heatmap.png" alt="Expense variance heatmap chart (illustrative)">
+            <div class="chart-caption">Spot subscription creep and category drift early, then drill into the “why.”</div>
+          </div>
+        </article>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <a class="btn btn--primary" href="#download"><span class="btn__label">Download the sample pack</span></a>
+        <a class="btn btn--ghost" href="#modules" style="margin-left: 8px;"><span class="btn__label">Back to modules</span></a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="kicker">Implementation</div>
+      <h2>How we set it up (then keep it consistent)</h2>
+      <p class="muted">
+        Most reporting fails because the foundation is messy. We clean the structure once, then run the same cadence every month.
+      </p>
+
+      <div class="grid grid--3" style="margin-top: 18px;">
+        <div class="card">
+          <h3>Week 1 — Onboarding</h3>
+          <p class="muted">Connect QuickBooks Online or Xero, confirm access, gather statements, align on KPIs and reporting preferences.</p>
+        </div>
+        <div class="card">
+          <h3>Week 2 — Cleanup &amp; structure</h3>
+          <p class="muted">Reconcile, correct categories, build a readable chart of accounts, and lock in a repeatable monthly close checklist.</p>
+        </div>
+        <div class="card card--highlight">
+          <h3>Month 1 — Baseline pack</h3>
+          <p class="muted">Deliver the first reporting pack (statements + dashboards + insights). Confirm what matters and iterate quickly.</p>
+        </div>
+      </div>
+
+      <div class="grid grid--2" style="margin-top: 16px;">
+        <div class="card">
+          <h3>Ongoing — Monthly close</h3>
+          <p class="muted">Reconcile, review, and close with QA checks. We document anomalies so you’re never guessing.</p>
+        </div>
+        <div class="card">
+          <h3>Ongoing — Reporting cadence</h3>
+          <p class="muted">You receive the reporting pack on a consistent schedule, plus a short summary explaining what changed.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <a class="btn btn--primary" href="#contact"><span class="btn__label">Get a quote</span></a>
+        <a class="btn btn--ghost" href="pricing/" style="margin-left: 8px;"><span class="btn__label">See pricing</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="kicker">Contact</div>
+      <h2>Want reporting like this?</h2>
+      <p class="muted">Send a message — we’ll follow up by email.</p>
+
+      <div class="card" style="margin-top: 18px;">
+        <form class="form js-lead-form" method="POST" novalidate>
+  <div class="form-row">
+    <div class="field">
+      <label for="contact-name">Name <span class="small">(optional)</span></label>
+      <input class="input" id="contact-name" name="name" placeholder="Jane Doe" autocomplete="name">
+      <div class="error" aria-live="polite"></div>
+    </div>
+
+    <div class="field">
+      <label for="contact-email">Email <span class="small">(required)</span></label>
+      <input class="input" type="email" id="contact-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+      <div class="error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="contact-phone">Phone <span class="small">(optional)</span></label>
+      <input class="input" type="tel" id="contact-phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
+      <div class="error" aria-live="polite"></div>
+    </div>
+
+    <div class="field">
+      <label for="contact-company">Company <span class="small">(optional)</span></label>
+      <input class="input" id="contact-company" name="company" placeholder="Company LLC" autocomplete="organization">
+      <div class="error" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="contact-notes">Notes <span class="small">(optional)</span></label>
+    <textarea class="textarea" id="contact-notes" name="notes" placeholder="What do you want better visibility into? (monthly reporting, cleanup, KPIs, cash flow, etc.)"></textarea>
+    <div class="error" aria-live="polite"></div>
+    <div class="hint">No sensitive information, please.</div>
+  </div>
+
+  <!-- Honeypot -->
+  <div class="field" style="position:absolute;left:-5000px;" aria-hidden="true">
+    <label for="contact-website">Website</label>
+    <input class="input" type="text" name="website" id="contact-website" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn--primary" type="submit">
+      <span class="btn__spinner" aria-hidden="true"></span>
+      <span class="btn__label">Send</span>
+    </button>
+    <div class="privacy">We’ll reply by email. Or email <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a> or <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a>.</div>
+  </div>
+
+  <div class="form-status" data-form-status role="status" aria-live="polite">
+    Enter your email and we’ll reach out.
+  </div>
+</form>
+      </div>
+    </div>
+  </section>
+</main>
+
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/img/mark-blue.png" alt="" width="44" height="52">
+          <div>
+            <div style="font-family: var(--font-heading); font-weight: 700;">FinSync Solutions</div>
+            <div class="small">Bookkeeping &amp; business clarity</div>
+          </div>
+        </div>
+        <p class="footer__meta">
+          A modern, process-driven bookkeeping partner. Built to keep your numbers clean, your close on time, and your decisions confident.
+        </p>
+      </div>
+
+      <div class="footer__links" aria-label="Footer navigation">
+        <div style="font-weight: 700; margin-bottom: 8px;">Explore</div>
+        <a href="services/">Services</a>
+        <a href="pricing/">Pricing</a>
+        <a href="reporting/">Reporting</a>
+        <a href="about/">About</a>
+      </div>
+
+      <div>
+        <div style="font-weight: 700; margin-bottom: 8px;">Contact</div>
+        <div class="small">Email</div>
+        <div class="footer__email-list">
+          <a href="mailto:curtis@finsyncsolutions.org">curtis@finsyncsolutions.org</a>
+          <a href="mailto:murad@finsyncsolutions.org">murad@finsyncsolutions.org</a>
+        </div>
+        <div class="small" style="margin-top: 12px;">We typically respond within 1 business day.</div>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <div>© <span data-year></span> FinSync Solutions</div>
+      <div class="small">Built with a focus on clarity, accessibility, and performance.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 5l-7 7m7-7l7 7M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+</body>
+</html>

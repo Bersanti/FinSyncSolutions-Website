@@ -90,7 +90,7 @@
       <a class="nav-link" href="./">Home</a>
       <a class="nav-link" href="services/">Services</a>
       <a class="nav-link" href="pricing/">Pricing</a>
-      <a class="nav-link" href="purpose/">Purpose</a>
+      <a class="nav-link" href="reporting/">Reporting</a>
       <a class="nav-link" href="about/">About</a>
     </nav>
 
@@ -110,7 +110,7 @@
       <a href="./">Home</a>
       <a href="services/">Services</a>
       <a href="pricing/">Pricing</a>
-      <a href="purpose/">Purpose</a>
+      <a href="reporting/">Reporting</a>
       <a href="about/">About</a>
       <div class="mobile-cta">
         <a class="btn btn--primary" href="#contact">
@@ -233,6 +233,146 @@
       </div>
     </section>
 
+
+    <section class="section section--tight">
+      <div class="container">
+        <div class="kicker">Proof</div>
+        <h2>Reporting that shows you what to do next</h2>
+        <p class="muted">Most bookkeeping stops at statements. We deliver a monthly reporting pack that surfaces trends, risks, and next steps.</p>
+
+        <div class="grid grid--2" style="margin-top: 18px; grid-template-columns: 1.25fr 0.95fr;">
+          <div class="grid" style="gap: 16px;">
+            <article class="card">
+              <div class="kicker">Example insight</div>
+              <h3>Margin drivers</h3>
+              <p class="muted">Know whether profit changed because of pricing, mix, COGS drift, or OpEx.</p>
+              <div class="chart-shell" aria-label="Example margin drivers chart">
+                <svg viewBox="0 0 320 130" role="img" aria-labelledby="mdTitle mdDesc">
+                  <title id="mdTitle">Margin drivers</title>
+                  <desc id="mdDesc">Illustrative bars showing margin change driven by mix and pricing.</desc>
+                  <path d="M18 108H306" stroke="rgba(255,255,255,0.10)"/>
+                  <rect x="36" y="62" width="48" height="46" rx="10" fill="rgba(45,125,255,0.85)"/>
+                  <rect x="104" y="76" width="48" height="32" rx="10" fill="rgba(0,212,255,0.85)"/>
+                  <rect x="172" y="90" width="48" height="18" rx="10" fill="rgba(255,255,255,0.12)"/>
+                  <rect x="240" y="54" width="48" height="54" rx="10" fill="rgba(47,230,166,0.85)"/>
+                  <text x="40" y="124" font-size="12" fill="var(--muted)">Mix</text>
+                  <text x="103" y="124" font-size="12" fill="var(--muted)">Price</text>
+                  <text x="168" y="124" font-size="12" fill="var(--muted)">COGS</text>
+                  <text x="235" y="124" font-size="12" fill="var(--muted)">Result</text>
+                </svg>
+                <div class="chart-caption">Example: margin improved from mix — not just volume.</div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="kicker">Example insight</div>
+              <h3>Cash runway</h3>
+              <p class="muted">Track minimum cash threshold and stress-test downside scenarios.</p>
+              <div class="chart-shell" aria-label="Example cash runway chart">
+                <svg viewBox="0 0 320 130" role="img" aria-labelledby="crTitle crDesc">
+                  <title id="crTitle">Cash runway</title>
+                  <desc id="crDesc">Illustrative line trending down to a minimum cash threshold.</desc>
+                  <path d="M18 108H306" stroke="rgba(255,255,255,0.10)"/>
+                  <path d="M18 78H306" stroke="rgba(255,255,255,0.06)"/>
+                  <path d="M18 48H306" stroke="rgba(255,255,255,0.05)"/>
+                  <path d="M18 92H306" stroke="rgba(255,77,94,0.55)" stroke-dasharray="4 4"/>
+                  <polyline points="26,42 88,52 150,64 212,78 274,94" fill="none" stroke="var(--accent-2)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <polyline points="26,42 88,52 150,64 212,78 274,94 274,108 26,108" fill="var(--accent-2)" opacity="0.10"/>
+                  <text x="18" y="90" font-size="12" fill="rgba(255,166,174,0.95)">Min cash</text>
+                </svg>
+                <div class="chart-caption">Example: ~7–8 months runway under a stress scenario.</div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="kicker">Example insight</div>
+              <h3>Spend anomalies</h3>
+              <p class="muted">Spot subscription creep and category drift early with a variance heatmap.</p>
+              <div class="chart-shell" aria-label="Example spend variance heatmap">
+                <svg viewBox="0 0 320 130" role="img" aria-labelledby="hmTitle hmDesc">
+                  <title id="hmTitle">Spend variance heatmap</title>
+                  <desc id="hmDesc">Illustrative heatmap grid showing variance intensity.</desc>
+                  <rect x="22" y="24" width="276" height="76" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+                  <!-- grid cells -->
+                  <g opacity="0.95">
+                    <rect x="34" y="36" width="44" height="18" rx="6" fill="rgba(47,230,166,0.55)"/>
+                    <rect x="84" y="36" width="44" height="18" rx="6" fill="rgba(47,230,166,0.35)"/>
+                    <rect x="134" y="36" width="44" height="18" rx="6" fill="rgba(47,230,166,0.35)"/>
+                    <rect x="184" y="36" width="44" height="18" rx="6" fill="rgba(255,77,94,0.35)"/>
+                    <rect x="234" y="36" width="44" height="18" rx="6" fill="rgba(255,77,94,0.55)"/>
+
+                    <rect x="34" y="58" width="44" height="18" rx="6" fill="rgba(47,230,166,0.20)"/>
+                    <rect x="84" y="58" width="44" height="18" rx="6" fill="rgba(255,255,255,0.10)"/>
+                    <rect x="134" y="58" width="44" height="18" rx="6" fill="rgba(255,255,255,0.10)"/>
+                    <rect x="184" y="58" width="44" height="18" rx="6" fill="rgba(47,230,166,0.20)"/>
+                    <rect x="234" y="58" width="44" height="18" rx="6" fill="rgba(255,77,94,0.35)"/>
+
+                    <rect x="34" y="80" width="44" height="18" rx="6" fill="rgba(255,255,255,0.10)"/>
+                    <rect x="84" y="80" width="44" height="18" rx="6" fill="rgba(255,77,94,0.20)"/>
+                    <rect x="134" y="80" width="44" height="18" rx="6" fill="rgba(47,230,166,0.20)"/>
+                    <rect x="184" y="80" width="44" height="18" rx="6" fill="rgba(255,77,94,0.55)"/>
+                    <rect x="234" y="80" width="44" height="18" rx="6" fill="rgba(255,77,94,0.35)"/>
+                  </g>
+                  <text x="22" y="122" font-size="12" fill="var(--muted)">Green: under budget • Red: over budget</text>
+                </svg>
+                <div class="chart-caption">Example: travel spike + software creep surfaced early.</div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="card card--highlight">
+            <div class="kicker">Lead magnet</div>
+            <h3>Download the sample monthly reporting pack</h3>
+            <p class="muted">A PDF example (illustrative) of what you’ll receive each month.</p>
+
+            <form class="form js-download-form" method="POST" novalidate data-download-path="assets/downloads/FinSync-Sample-Monthly-Reporting-Pack.pdf">
+              <input type="hidden" name="lead_type" value="sample_pack_download">
+              <input type="hidden" name="asset" value="sample_monthly_reporting_pack">
+              <input type="hidden" name="source" value="home_proof_section">
+
+              <div class="field">
+                <label for="home-sample-email">Email <span class="small">(required)</span></label>
+                <input class="input" type="email" id="home-sample-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+                <div class="error" aria-live="polite"></div>
+              </div>
+
+              <!-- Honeypot -->
+              <div class="field" style="position:absolute;left:-5000px;" aria-hidden="true">
+                <label for="home-sample-website">Website</label>
+                <input class="input" type="text" name="website" id="home-sample-website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn--primary" type="submit">
+                  <span class="btn__spinner" aria-hidden="true"></span>
+                  <span class="btn__label">Unlock PDF</span>
+                </button>
+                <div class="privacy">QuickBooks Online + Xero supported</div>
+              </div>
+
+              <div class="form-status" data-form-status role="status" aria-live="polite">
+                Enter your email to unlock the PDF.
+              </div>
+
+              <div class="download-unlock" data-download-unlock hidden>
+                <div style="margin-top: 12px;">
+                  <a class="btn btn--ghost" href="assets/downloads/FinSync-Sample-Monthly-Reporting-Pack.pdf" target="_blank" rel="noopener">
+                    <span class="btn__label">Download / View PDF</span>
+                  </a>
+                </div>
+              </div>
+            </form>
+
+            <div style="margin-top: 14px;">
+              <a class="btn btn--ghost" href="reporting/"><span class="btn__label">View full reporting</span></a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+</section>
+
     <section class="section">
       <div class="container">
         <div class="kicker">How it works</div>
@@ -342,7 +482,7 @@
         <div style="font-weight: 700; margin-bottom: 8px;">Explore</div>
         <a href="services/">Services</a>
         <a href="pricing/">Pricing</a>
-        <a href="purpose/">Purpose</a>
+        <a href="reporting/">Reporting</a>
         <a href="about/">About</a>
       </div>
 
