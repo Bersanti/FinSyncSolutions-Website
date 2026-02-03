@@ -3,11 +3,13 @@
    - Back-to-top button
    - Active nav link highlighting
    - Lead form (Formspree) with validation + loading/success/error states
+   - Sample download modal with email delivery (Google Apps Script)
 */
 
 // Read config from assets/js/config.js
 const CONFIG = (window && window.FINSYNC) ? window.FINSYNC : {};
 const FORMSPREE_ENDPOINT = CONFIG.formspreeEndpoint || "https://formspree.io/f/YOUR_FORM_ID";
+const SAMPLE_EMAIL_ENDPOINT = CONFIG.sampleEmailEndpoint || "";
 const BUSINESS_EMAIL = CONFIG.businessEmail || "curtis@finsyncsolutions.org";
 
 
@@ -16,6 +18,10 @@ const SELECTORS = {
   mobileNav: "[data-mobile-nav]",
   backToTop: "[data-back-to-top]",
   leadForm: ".js-lead-form",
+  downloadTrigger: "[data-download-trigger]",
+  downloadModal: "#download-modal",
+  downloadForm: "#download-form",
+  modalClose: "[data-modal-close]",
 };
 
 function isGitHubPagesProject() {
@@ -25,15 +31,10 @@ function isGitHubPagesProject() {
 function getRepoNameIfGitHubProject() {
   if (!location.hostname.endsWith("github.io")) return "";
   const parts = location.pathname.split("/").filter(Boolean);
-  // On project pages: /repoName/...
-  // On user/org pages: / (no repoName)
   return parts.length >= 1 ? parts[0] : "";
 }
 
 function normalizePathname(pathname) {
-  // Normalize:
-  // - Remove repoName prefix for GitHub project pages
-  // - Ensure trailing slash
   let p = pathname;
 
   if (location.hostname.endsWith("github.io")) {
@@ -56,7 +57,6 @@ function setActiveNavLink() {
     const url = new URL(a.href);
     const target = normalizePathname(url.pathname);
 
-    // Home link: consider "/" active on home
     const isHome = current === "/" && (target === "/" || target === "//");
     const active = isHome || current === target;
 
@@ -88,17 +88,14 @@ function initMobileNav() {
     expanded ? close() : open();
   });
 
-  // Close when clicking the dimmed overlay
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) close();
   });
 
-  // Close when clicking any nav link in the panel
   overlay.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", () => close());
   });
 
-  // Close on Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
   });
@@ -127,14 +124,12 @@ function setFooterYear() {
 }
 
 function isValidEmail(value) {
-  // Friendly (not perfect) email validation
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value).trim());
 }
 
 function isValidPhone(value) {
   const v = String(value).trim();
-  if (!v) return true; // optional
-  // Allow digits, spaces, plus, parentheses, hyphen
+  if (!v) return true;
   return /^[0-9+\-\s().]{7,}$/.test(v);
 }
 
@@ -167,21 +162,16 @@ async function submitToFormspree(form) {
 
   const formData = new FormData(form);
 
-  // Honeypot (spam trap)
   const honey = formData.get("website");
   if (honey && String(honey).trim().length > 0) {
-    // Pretend success (quietly drop)
     return { ok: true };
   }
 
-  // Always attach context
   formData.append("source_url", location.href);
   formData.append("source_page", normalizePathname(location.pathname));
   formData.append("submitted_at", new Date().toISOString());
 
   if (!hasRealEndpoint) {
-    // No endpoint yet — fall back to mailto for now so the form still "works".
-    // This will open the user's email client; for automatic emails, configure Formspree.
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
@@ -204,7 +194,6 @@ async function submitToFormspree(form) {
     const body = encodeURIComponent(bodyLines.join("\n"));
     window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
 
-    // Consider it successful from a UI perspective.
     return { ok: true, usedMailto: true };
   }
 
@@ -218,7 +207,6 @@ async function submitToFormspree(form) {
 
   if (response.ok) return { ok: true };
 
-  // Try to extract Formspree error (if any)
   let errorMsg = "Something went wrong. Please try again.";
   try {
     const data = await response.json();
@@ -245,7 +233,6 @@ function initLeadForms() {
       phone: phoneInput ? phoneInput.closest(".field") : null,
     };
 
-    // Clear error on input
     ["name", "email", "phone", "company", "notes"].forEach((n) => {
       const el = form.querySelector(`[name='${n}']`);
       if (!el) return;
@@ -258,16 +245,15 @@ function initLeadForms() {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Validate
       let firstInvalid = null;
 
       if (fieldEls.name) clearFieldError(fieldEls.name);
       if (fieldEls.email) clearFieldError(fieldEls.email);
       if (fieldEls.phone) clearFieldError(fieldEls.phone);
 
-      const nameVal = nameInput ? String(nameInput.value).trim() : "";
       const emailVal = emailInput ? String(emailInput.value).trim() : "";
       const phoneVal = phoneInput ? String(phoneInput.value).trim() : "";
+      
       if (!emailVal || !isValidEmail(emailVal)) {
         if (fieldEls.email) setFieldError(fieldEls.email, "Please enter a valid email address.");
         firstInvalid = firstInvalid || emailInput;
@@ -283,7 +269,6 @@ function initLeadForms() {
         return;
       }
 
-      // Loading UI
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.classList.add("is-loading");
@@ -319,10 +304,223 @@ function initLeadForms() {
   });
 }
 
+
+/* ============================================
+   SAMPLE DOWNLOAD MODAL - EMAIL DELIVERY
+   ============================================ */
+
+function initDownloadModal() {
+  const triggers = document.querySelectorAll(SELECTORS.downloadTrigger);
+  const modal = document.querySelector(SELECTORS.downloadModal);
+  const form = document.querySelector(SELECTORS.downloadForm);
+  const closeButtons = document.querySelectorAll(SELECTORS.modalClose);
+  
+  if (!modal || !form) return;
+  
+  const modalForm = modal.querySelector(".modal__form");
+  const modalSuccess = modal.querySelector(".modal__success");
+  const modalError = modal.querySelector(".modal__error");
+  const emailInput = form.querySelector("[name='email']");
+  const emailField = emailInput ? emailInput.closest(".field") : null;
+  const submitBtn = form.querySelector("button[type='submit']");
+  
+  // Open modal
+  function openModal() {
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    
+    // Reset state
+    form.reset();
+    if (emailField) clearFieldError(emailField);
+    if (modalForm) modalForm.style.display = "block";
+    if (modalSuccess) modalSuccess.style.display = "none";
+    if (modalError) modalError.style.display = "none";
+    
+    setTimeout(() => {
+      if (emailInput) emailInput.focus();
+    }, 250);
+  }
+  
+  // Close modal
+  function closeModal() {
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+  
+  // Show success state
+  function showSuccess(email) {
+    if (modalForm) modalForm.style.display = "none";
+    if (modalError) modalError.style.display = "none";
+    if (modalSuccess) modalSuccess.style.display = "block";
+    
+    // Update the email display in success message
+    const emailDisplay = modalSuccess.querySelector("[data-user-email]");
+    if (emailDisplay) emailDisplay.textContent = email;
+    
+    console.log("=== SAMPLE REQUESTED ===");
+    console.log("Email:", email);
+    console.log("Timestamp:", new Date().toISOString());
+    console.log("Email will be sent from Curtis");
+    console.log("========================");
+  }
+  
+  // Show error state
+  function showError(message) {
+    if (modalForm) modalForm.style.display = "none";
+    if (modalSuccess) modalSuccess.style.display = "none";
+    if (modalError) {
+      modalError.style.display = "block";
+      const errorMsg = modalError.querySelector("[data-error-message]");
+      if (errorMsg) errorMsg.textContent = message;
+    }
+  }
+  
+  // Submit to Google Apps Script (sends email with PDF)
+  async function submitForEmailDelivery(email) {
+    const endpoint = SAMPLE_EMAIL_ENDPOINT;
+    const hasEndpoint = endpoint && endpoint.includes("script.google.com");
+    
+    const data = {
+      email: email,
+      source: "sample_download",
+      source_url: location.href,
+      submitted_at: new Date().toISOString(),
+    };
+    
+    console.log("Submitting for email delivery:", data);
+    
+    if (!hasEndpoint) {
+      console.warn("Sample email endpoint not configured. Email delivery will not work.");
+      console.log("Configure 'sampleEmailEndpoint' in config.js");
+      return { 
+        ok: false, 
+        message: "Email delivery is not configured. Please contact curtis@finsyncsolutions.org directly." 
+      };
+    }
+    
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(data),
+      });
+      
+      const result = await response.json();
+      console.log("Email delivery response:", result);
+      
+      if (result.success) {
+        return { ok: true };
+      } else {
+        return { ok: false, message: result.message || "Failed to send email" };
+      }
+      
+    } catch (err) {
+      console.error("Email delivery error:", err);
+      return { 
+        ok: false, 
+        message: "Network error. Please try again or contact curtis@finsyncsolutions.org directly." 
+      };
+    }
+  }
+  
+  // Attach trigger listeners
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+  
+  // Attach close listeners
+  closeButtons.forEach((btn) => {
+    btn.addEventListener("click", closeModal);
+  });
+  
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") {
+      closeModal();
+    }
+  });
+  
+  // Form submission
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    
+    const email = emailInput ? String(emailInput.value).trim() : "";
+    
+    // Honeypot check
+    const honey = form.querySelector("[name='website']");
+    if (honey && String(honey.value).trim().length > 0) {
+      showSuccess("bot@detected.com");
+      return;
+    }
+    
+    // Validate email
+    if (!email || !isValidEmail(email)) {
+      if (emailField) setFieldError(emailField, "Please enter a valid email address.");
+      if (emailInput) emailInput.focus();
+      return;
+    }
+    
+    if (emailField) clearFieldError(emailField);
+    
+    // Loading state
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add("is-loading");
+    }
+    
+    try {
+      const result = await submitForEmailDelivery(email);
+      
+      if (result.ok) {
+        showSuccess(email);
+      } else {
+        showError(result.message || "Something went wrong. Please try again.");
+      }
+      
+    } catch (err) {
+      console.error("Form submission error:", err);
+      showError("Something went wrong. Please try again or contact us directly.");
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("is-loading");
+      }
+    }
+  });
+  
+  // Clear error on input
+  if (emailInput && emailField) {
+    emailInput.addEventListener("input", () => {
+      clearFieldError(emailField);
+    });
+  }
+  
+  // Retry button in error state
+  const retryBtn = modal.querySelector("[data-retry]");
+  if (retryBtn) {
+    retryBtn.addEventListener("click", () => {
+      if (modalError) modalError.style.display = "none";
+      if (modalForm) modalForm.style.display = "block";
+      if (emailInput) emailInput.focus();
+    });
+  }
+}
+
+
+/* ============================================
+   INITIALIZATION
+   ============================================ */
+
 document.addEventListener("DOMContentLoaded", () => {
   setActiveNavLink();
   initMobileNav();
   initBackToTop();
   initLeadForms();
+  initDownloadModal();
   setFooterYear();
 });

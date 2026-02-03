@@ -1,12 +1,12 @@
 // FinSync Solutions — site configuration
 // Update this file to match your environment.
 
-window.FINSYNC = {
-  // 1) Create a form in Formspree (https://formspree.io)
-  // 2) Copy the endpoint URL (looks like: https://formspree.io/f/abcdwxyz)
-  // 3) Paste it below
-  formspreeEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
+// FinSync Solutions — site configuration
 
-  // The inbox that should receive leads (Formspree must be configured to deliver to this email)
+window.FINSYNC = {
+  formspreeEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
   businessEmail: "curtis@finsyncsolutions.org",
+  
+  // Paste your Web App URL here:
+  sampleEmailEndpoint: "https://script.google.com/macros/s/AKfycbxGSip-45yFykVj5_pFblCXFk6OIImuvwk1TujpLSEGsrkPwOMynTPGPlNSg7CmAcy3/exec",
 };
