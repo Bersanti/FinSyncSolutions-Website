@@ -2,32 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://finsyncsolutions.org/</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-02-10</lastmod>
   </url>
   <url>
-    <loc>https://finsyncsolutions.org/services/</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://finsyncsolutions.org/about.html</loc>
+    <lastmod>2026-02-10</lastmod>
   </url>
   <url>
-    <loc>https://finsyncsolutions.org/pricing/</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://finsyncsolutions.org/services.html</loc>
+    <lastmod>2026-02-10</lastmod>
   </url>
   <url>
-    <loc>https://finsyncsolutions.org/purpose/</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://finsyncsolutions.org/faq.html</loc>
+    <lastmod>2026-02-10</lastmod>
   </url>
   <url>
-    <loc>https://finsyncsolutions.org/about/</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://finsyncsolutions.org/contact.html</loc>
+    <lastmod>2026-02-10</lastmod>
+  </url>
+  <url>
+    <loc>https://finsyncsolutions.org/what-we-do.html</loc>
+    <lastmod>2026-02-10</lastmod>
+  </url>
+  <url>
+    <loc>https://finsyncsolutions.org/how-we-do-it.html</loc>
+    <lastmod>2026-02-10</lastmod>
   </url>
 </urlset>

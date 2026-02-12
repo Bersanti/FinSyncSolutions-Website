@@ -1,526 +1,247 @@
-/* FinSync Solutions — main JS
-   - Mobile navigation (hamburger)
-   - Back-to-top button
-   - Active nav link highlighting
-   - Lead form (Formspree) with validation + loading/success/error states
-   - Sample download modal with email delivery (Google Apps Script)
-*/
+// assets/js/main.js
+(() => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Read config from assets/js/config.js
-const CONFIG = (window && window.FINSYNC) ? window.FINSYNC : {};
-const FORMSPREE_ENDPOINT = CONFIG.formspreeEndpoint || "https://formspree.io/f/YOUR_FORM_ID";
-const SAMPLE_EMAIL_ENDPOINT = CONFIG.sampleEmailEndpoint || "";
-const BUSINESS_EMAIL = CONFIG.businessEmail || "curtis@finsyncsolutions.org";
+  // Mobile nav toggle
+  const header = document.querySelector('[data-header]');
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const panel = document.querySelector('[data-nav-panel]');
 
-
-const SELECTORS = {
-  navToggle: "[data-nav-toggle]",
-  mobileNav: "[data-mobile-nav]",
-  backToTop: "[data-back-to-top]",
-  leadForm: ".js-lead-form",
-  downloadTrigger: "[data-download-trigger]",
-  downloadModal: "#download-modal",
-  downloadForm: "#download-form",
-  modalClose: "[data-modal-close]",
-};
-
-function isGitHubPagesProject() {
-  return location.hostname.endsWith("github.io") && location.pathname.split("/").filter(Boolean).length >= 1;
-}
-
-function getRepoNameIfGitHubProject() {
-  if (!location.hostname.endsWith("github.io")) return "";
-  const parts = location.pathname.split("/").filter(Boolean);
-  return parts.length >= 1 ? parts[0] : "";
-}
-
-function normalizePathname(pathname) {
-  let p = pathname;
-
-  if (location.hostname.endsWith("github.io")) {
-    const repo = getRepoNameIfGitHubProject();
-    if (repo && p.startsWith("/" + repo)) {
-      p = p.slice(("/" + repo).length);
-      if (!p.startsWith("/")) p = "/" + p;
-    }
-  }
-
-  if (!p.endsWith("/")) p += "/";
-  return p;
-}
-
-function setActiveNavLink() {
-  const current = normalizePathname(location.pathname);
-  const links = document.querySelectorAll(".nav-link, .mobile-nav__panel a");
-
-  links.forEach((a) => {
-    const url = new URL(a.href);
-    const target = normalizePathname(url.pathname);
-
-    const isHome = current === "/" && (target === "/" || target === "//");
-    const active = isHome || current === target;
-
-    a.classList.toggle("is-active", active);
-  });
-}
-
-function initMobileNav() {
-  const btn = document.querySelector(SELECTORS.navToggle);
-  const overlay = document.querySelector(SELECTORS.mobileNav);
-  if (!btn || !overlay) return;
-
-  overlay.setAttribute("aria-hidden", "true");
-
-  const close = () => {
-    document.body.classList.remove("nav-open");
-    btn.setAttribute("aria-expanded", "false");
-    overlay.setAttribute("aria-hidden", "true");
-  };
-
-  const open = () => {
-    document.body.classList.add("nav-open");
-    btn.setAttribute("aria-expanded", "true");
-    overlay.setAttribute("aria-hidden", "false");
-  };
-
-  btn.addEventListener("click", () => {
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    expanded ? close() : open();
-  });
-
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) close();
-  });
-
-  overlay.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => close());
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
-  });
-}
-
-function initBackToTop() {
-  const btn = document.querySelector(SELECTORS.backToTop);
-  if (!btn) return;
-
-  const onScroll = () => {
-    const visible = window.scrollY > 700;
-    btn.classList.toggle("is-visible", visible);
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  btn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
-function setFooterYear() {
-  const el = document.querySelector("[data-year]");
-  if (el) el.textContent = String(new Date().getFullYear());
-}
-
-function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value).trim());
-}
-
-function isValidPhone(value) {
-  const v = String(value).trim();
-  if (!v) return true;
-  return /^[0-9+\-\s().]{7,}$/.test(v);
-}
-
-function setFieldError(fieldEl, message) {
-  fieldEl.classList.add("is-error");
-  const errorEl = fieldEl.querySelector(".error");
-  if (errorEl) errorEl.textContent = message;
-}
-
-function clearFieldError(fieldEl) {
-  fieldEl.classList.remove("is-error");
-  const errorEl = fieldEl.querySelector(".error");
-  if (errorEl) errorEl.textContent = "";
-}
-
-function setFormStatus(form, state, message) {
-  const status = form.querySelector("[data-form-status]");
-  if (!status) return;
-
-  status.classList.remove("is-success", "is-error");
-  if (state === "success") status.classList.add("is-success");
-  if (state === "error") status.classList.add("is-error");
-
-  status.textContent = message;
-}
-
-async function submitToFormspree(form) {
-  const endpoint = FORMSPREE_ENDPOINT;
-  const hasRealEndpoint = endpoint && !endpoint.includes("YOUR_FORM_ID");
-
-  const formData = new FormData(form);
-
-  const honey = formData.get("website");
-  if (honey && String(honey).trim().length > 0) {
-    return { ok: true };
-  }
-
-  formData.append("source_url", location.href);
-  formData.append("source_page", normalizePathname(location.pathname));
-  formData.append("submitted_at", new Date().toISOString());
-
-  if (!hasRealEndpoint) {
-    const name = String(formData.get("name") || "").trim();
-    const email = String(formData.get("email") || "").trim();
-    const phone = String(formData.get("phone") || "").trim();
-    const company = String(formData.get("company") || "").trim();
-    const notes = String(formData.get("notes") || "").trim();
-
-    const subject = encodeURIComponent("New lead — FinSync Solutions");
-    const bodyLines = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone ? `Phone: ${phone}` : "",
-      company ? `Company: ${company}` : "",
-      "",
-      "Notes:",
-      notes || "(none)",
-      "",
-      `Page: ${location.href}`,
-    ].filter(Boolean);
-
-    const body = encodeURIComponent(bodyLines.join("\n"));
-    window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
-
-    return { ok: true, usedMailto: true };
-  }
-
-  const response = await fetch(endpoint, {
-    method: "POST",
-    body: formData,
-    headers: {
-      Accept: "application/json",
-    },
-  });
-
-  if (response.ok) return { ok: true };
-
-  let errorMsg = "Something went wrong. Please try again.";
-  try {
-    const data = await response.json();
-    if (data && data.errors && data.errors.length) {
-      errorMsg = data.errors.map((e) => e.message).join(" ");
-    }
-  } catch (_) {}
-  return { ok: false, errorMsg };
-}
-
-function initLeadForms() {
-  const forms = document.querySelectorAll(SELECTORS.leadForm);
-  if (!forms.length) return;
-
-  forms.forEach((form) => {
-    const submitBtn = form.querySelector("button[type='submit']");
-    const nameInput = form.querySelector("[name='name']");
-    const emailInput = form.querySelector("[name='email']");
-    const phoneInput = form.querySelector("[name='phone']");
-
-    const fieldEls = {
-      name: nameInput ? nameInput.closest(".field") : null,
-      email: emailInput ? emailInput.closest(".field") : null,
-      phone: phoneInput ? phoneInput.closest(".field") : null,
+  if (header && toggle && panel) {
+    const closeMenu = () => {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
     };
 
-    ["name", "email", "phone", "company", "notes"].forEach((n) => {
-      const el = form.querySelector(`[name='${n}']`);
-      if (!el) return;
-      const wrapper = el.closest(".field");
-      el.addEventListener("input", () => {
-        if (wrapper) clearFieldError(wrapper);
-      });
+    toggle.addEventListener('click', () => {
+      const isOpen = header.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
-    form.addEventListener("submit", async (e) => {
+    panel.addEventListener('click', (e) => {
+      if (e.target.closest('a')) closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  }
+
+  // Reveal on scroll
+  const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+  if (revealEls.length) {
+    if (prefersReducedMotion) {
+      revealEls.forEach((el) => el.classList.add('is-revealed'));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.12 }
+      );
+
+      revealEls.forEach((el) => io.observe(el));
+    }
+  }
+
+  
+  // Home: spreadsheet motif animation (What we do card)
+  const sheet = document.querySelector('[data-sheet]');
+  if (sheet) {
+    const track = sheet.querySelector('[data-sheet-track]');
+    const rows = track ? Array.from(track.querySelectorAll('.sheet__row')) : [];
+    const cols = 6;
+
+    const randomRow = () => {
+      const out = [];
+      for (let i = 0; i < cols; i++) {
+        const value = Math.floor(6000 + Math.random() * (76000 - 6000 + 1));
+        out.push('$' + value.toLocaleString('en-US'));
+      }
+      return out;
+    };
+
+    const setRow = (rowEl, values, isLive = false) => {
+      const cells = Array.from(rowEl.querySelectorAll('.sheet__cell'));
+      for (let i = 0; i < cells.length; i++) {
+        const cell = cells[i];
+        cell.textContent = values ? (values[i] || '') : '';
+        cell.classList.toggle('is-live', isLive && !!values);
+      }
+    };
+
+    let history = [null, null, null]; // rows 1–3 (oldest → newest)
+    let live = randomRow();
+
+    const render = () => {
+      for (let r = 0; r < rows.length; r++) {
+        if (r === 0) setRow(rows[r], history[0], false);
+        else if (r === 1) setRow(rows[r], history[1], false);
+        else if (r === 2) setRow(rows[r], history[2], false);
+        else if (r === 3) setRow(rows[r], live, true);
+        else setRow(rows[r], null, false);
+      }
+    };
+
+    render();
+
+    // Respect reduced motion: keep a static grid
+    if (!prefersReducedMotion && track && rows.length >= 7) {
+      const rowHeight = parseFloat(getComputedStyle(sheet).getPropertyValue('--sheet-row')) || 18;
+      const durationMs = 1400;
+      const pauseMs = 220;
+
+      const step = () => {
+        track.style.transition = `transform ${durationMs}ms linear`;
+        track.style.transform = `translateY(-${rowHeight}px)`;
+      };
+
+      const onEnd = (e) => {
+        if (e.propertyName !== 'transform') return;
+
+        // Rotate first row to bottom and reset transform for seamless looping
+        track.style.transition = 'none';
+        const first = rows.shift();
+        if (first) {
+          track.appendChild(first);
+          rows.push(first);
+        }
+        track.style.transform = 'translateY(0)';
+
+        // Shift ladder values up by one row and generate a new live row
+        history = [history[1], history[2], live];
+        live = randomRow();
+
+        render();
+
+        // Force reflow so the next transition starts cleanly
+        track.getBoundingClientRect();
+        window.setTimeout(step, pauseMs);
+      };
+
+      track.addEventListener('transitionend', onEnd);
+
+      // Start the loop
+      window.setTimeout(step, 650);
+    }
+  }
+
+
+  // Smooth anchor scroll (for pages like About)
+  if (!prefersReducedMotion) {
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (!href || href.length < 2) return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
       e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', href);
+    });
+  }
 
-      let firstInvalid = null;
+  // Contact form (placeholder submission handler)
+  const contactForm = document.querySelector('[data-contact-form]');
+  if (contactForm) {
+    const status = contactForm.querySelector('[data-form-status]');
 
-      if (fieldEls.name) clearFieldError(fieldEls.name);
-      if (fieldEls.email) clearFieldError(fieldEls.email);
-      if (fieldEls.phone) clearFieldError(fieldEls.phone);
+    const setError = (id, message) => {
+      const input = contactForm.querySelector('#' + id);
+      const errorEl = contactForm.querySelector(`[data-error-for="${id}"]`);
 
-      const emailVal = emailInput ? String(emailInput.value).trim() : "";
-      const phoneVal = phoneInput ? String(phoneInput.value).trim() : "";
-      
-      if (!emailVal || !isValidEmail(emailVal)) {
-        if (fieldEls.email) setFieldError(fieldEls.email, "Please enter a valid email address.");
-        firstInvalid = firstInvalid || emailInput;
+      if (input) input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (errorEl) errorEl.textContent = message || '';
+
+      const wrapper = input ? input.closest('.field') : null;
+      if (wrapper) wrapper.classList.toggle('field--error', !!message);
+    };
+
+    const clearErrors = () => {
+      contactForm.querySelectorAll('.field').forEach((f) => f.classList.remove('field--error'));
+      contactForm.querySelectorAll('[data-error-for]').forEach((e) => (e.textContent = ''));
+      contactForm.querySelectorAll('[aria-invalid]').forEach((i) => i.setAttribute('aria-invalid', 'false'));
+    };
+
+    const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const fullName = contactForm.querySelector('#fullName');
+      const businessName = contactForm.querySelector('#businessName');
+      const email = contactForm.querySelector('#email');
+
+      let ok = true;
+
+      if (!fullName || !fullName.value.trim()) {
+        setError('fullName', 'Please enter your full name.');
+        ok = false;
       }
-      if (phoneInput && !isValidPhone(phoneVal)) {
-        if (fieldEls.phone) setFieldError(fieldEls.phone, "Please enter a valid phone number (or leave it blank).");
-        firstInvalid = firstInvalid || phoneInput;
+      if (!businessName || !businessName.value.trim()) {
+        setError('businessName', 'Please enter your business name.');
+        ok = false;
+      }
+      if (!email || !email.value.trim()) {
+        setError('email', 'Please enter your email.');
+        ok = false;
+      } else if (!isValidEmail(email.value)) {
+        setError('email', 'Please enter a valid email address.');
+        ok = false;
       }
 
-      if (firstInvalid) {
-        firstInvalid.focus();
-        setFormStatus(form, "error", "Please fix the highlighted fields and try again.");
+      if (!ok) {
+        if (status) status.textContent = 'Please fix the highlighted fields and try again.';
         return;
       }
 
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.classList.add("is-loading");
-      }
-      setFormStatus(form, "neutral", "Sending…");
-
-      try {
-        const result = await submitToFormspree(form);
-
-        if (result.ok) {
-          form.reset();
-          setFormStatus(
-            form,
-            "success",
-            result.usedMailto
-              ? "Thanks — your email draft is ready to send. Once you set up Formspree, messages will send automatically."
-              : "Thanks! We received your message and will follow up shortly."
-          );
-          return;
-        }
-
-        setFormStatus(form, "error", result.errorMsg || "Something went wrong. Please try again.");
-
-      } catch (err) {
-        setFormStatus(form, "error", "Network error. Please try again, or email " + BUSINESS_EMAIL + ".");
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.classList.remove("is-loading");
-        }
-      }
+      // TODO: Replace this placeholder with real submission logic (fetch/POST to your backend).
+      if (status) status.textContent = "Thanks. We received your message and will follow up by email.";
+      contactForm.reset();
     });
-  });
-}
+  }
 
+  // Sample report widget (placeholder)
+  const sampleForm = document.querySelector('[data-sample-report-form]');
+  if (sampleForm) {
+    const status = sampleForm.querySelector('[data-sample-status]');
+    const emailInput = sampleForm.querySelector('input[type="email"]');
 
-/* ============================================
-   SAMPLE DOWNLOAD MODAL - EMAIL DELIVERY
-   ============================================ */
+    const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
-function initDownloadModal() {
-  const triggers = document.querySelectorAll(SELECTORS.downloadTrigger);
-  const modal = document.querySelector(SELECTORS.downloadModal);
-  const form = document.querySelector(SELECTORS.downloadForm);
-  const closeButtons = document.querySelectorAll(SELECTORS.modalClose);
-  
-  if (!modal || !form) return;
-  
-  const modalForm = modal.querySelector(".modal__form");
-  const modalSuccess = modal.querySelector(".modal__success");
-  const modalError = modal.querySelector(".modal__error");
-  const emailInput = form.querySelector("[name='email']");
-  const emailField = emailInput ? emailInput.closest(".field") : null;
-  const submitBtn = form.querySelector("button[type='submit']");
-  
-  // Open modal
-  function openModal() {
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
-    
-    // Reset state
-    form.reset();
-    if (emailField) clearFieldError(emailField);
-    if (modalForm) modalForm.style.display = "block";
-    if (modalSuccess) modalSuccess.style.display = "none";
-    if (modalError) modalError.style.display = "none";
-    
-    setTimeout(() => {
-      if (emailInput) emailInput.focus();
-    }, 250);
-  }
-  
-  // Close modal
-  function closeModal() {
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
-  }
-  
-  // Show success state
-  function showSuccess(email) {
-    if (modalForm) modalForm.style.display = "none";
-    if (modalError) modalError.style.display = "none";
-    if (modalSuccess) modalSuccess.style.display = "block";
-    
-    // Update the email display in success message
-    const emailDisplay = modalSuccess.querySelector("[data-user-email]");
-    if (emailDisplay) emailDisplay.textContent = email;
-    
-    console.log("=== SAMPLE REQUESTED ===");
-    console.log("Email:", email);
-    console.log("Timestamp:", new Date().toISOString());
-    console.log("Email will be sent from Curtis");
-    console.log("========================");
-  }
-  
-  // Show error state
-  function showError(message) {
-    if (modalForm) modalForm.style.display = "none";
-    if (modalSuccess) modalSuccess.style.display = "none";
-    if (modalError) {
-      modalError.style.display = "block";
-      const errorMsg = modalError.querySelector("[data-error-message]");
-      if (errorMsg) errorMsg.textContent = message;
-    }
-  }
-  
-  // Submit to Google Apps Script (sends email with PDF)
-  async function submitForEmailDelivery(email) {
-    const endpoint = SAMPLE_EMAIL_ENDPOINT;
-    const hasEndpoint = endpoint && endpoint.includes("script.google.com");
-    
-    const data = {
-      email: email,
-      source: "sample_download",
-      source_url: location.href,
-      submitted_at: new Date().toISOString(),
-    };
-    
-    console.log("Submitting for email delivery:", data);
-    
-    if (!hasEndpoint) {
-      console.warn("Sample email endpoint not configured. Email delivery will not work.");
-      console.log("Configure 'sampleEmailEndpoint' in config.js");
-      return { 
-        ok: false, 
-        message: "Email delivery is not configured. Please contact curtis@finsyncsolutions.org directly." 
-      };
-    }
-    
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(data),
-      });
-      
-      const result = await response.json();
-      console.log("Email delivery response:", result);
-      
-      if (result.success) {
-        return { ok: true };
-      } else {
-        return { ok: false, message: result.message || "Failed to send email" };
-      }
-      
-    } catch (err) {
-      console.error("Email delivery error:", err);
-      return { 
-        ok: false, 
-        message: "Network error. Please try again or contact curtis@finsyncsolutions.org directly." 
-      };
-    }
-  }
-  
-  // Attach trigger listeners
-  triggers.forEach((trigger) => {
-    trigger.addEventListener("click", (e) => {
+    sampleForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      openModal();
-    });
-  });
-  
-  // Attach close listeners
-  closeButtons.forEach((btn) => {
-    btn.addEventListener("click", closeModal);
-  });
-  
-  // Close on Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") {
-      closeModal();
-    }
-  });
-  
-  // Form submission
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    
-    const email = emailInput ? String(emailInput.value).trim() : "";
-    
-    // Honeypot check
-    const honey = form.querySelector("[name='website']");
-    if (honey && String(honey.value).trim().length > 0) {
-      showSuccess("bot@detected.com");
-      return;
-    }
-    
-    // Validate email
-    if (!email || !isValidEmail(email)) {
-      if (emailField) setFieldError(emailField, "Please enter a valid email address.");
-      if (emailInput) emailInput.focus();
-      return;
-    }
-    
-    if (emailField) clearFieldError(emailField);
-    
-    // Loading state
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.classList.add("is-loading");
-    }
-    
-    try {
-      const result = await submitForEmailDelivery(email);
-      
-      if (result.ok) {
-        showSuccess(email);
-      } else {
-        showError(result.message || "Something went wrong. Please try again.");
+      if (!emailInput) return;
+
+      const value = emailInput.value.trim();
+
+      if (!value) {
+        emailInput.setAttribute('aria-invalid', 'true');
+        if (status) status.textContent = 'Please enter your email to receive the sample.';
+        return;
       }
-      
-    } catch (err) {
-      console.error("Form submission error:", err);
-      showError("Something went wrong. Please try again or contact us directly.");
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove("is-loading");
+
+      if (!isValidEmail(value)) {
+        emailInput.setAttribute('aria-invalid', 'true');
+        if (status) status.textContent = 'Please enter a valid email address.';
+        return;
       }
-    }
-  });
-  
-  // Clear error on input
-  if (emailInput && emailField) {
-    emailInput.addEventListener("input", () => {
-      clearFieldError(emailField);
+
+      emailInput.setAttribute('aria-invalid', 'false');
+
+      // TODO: Call your existing backend/email-delivery logic here.
+      if (status) status.textContent = 'Thanks. Check your inbox for the sample PDF.';
+      sampleForm.reset();
     });
   }
-  
-  // Retry button in error state
-  const retryBtn = modal.querySelector("[data-retry]");
-  if (retryBtn) {
-    retryBtn.addEventListener("click", () => {
-      if (modalError) modalError.style.display = "none";
-      if (modalForm) modalForm.style.display = "block";
-      if (emailInput) emailInput.focus();
-    });
-  }
-}
-
-
-/* ============================================
-   INITIALIZATION
-   ============================================ */
-
-document.addEventListener("DOMContentLoaded", () => {
-  setActiveNavLink();
-  initMobileNav();
-  initBackToTop();
-  initLeadForms();
-  initDownloadModal();
-  setFooterYear();
-});
+})();
