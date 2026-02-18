@@ -28,7 +28,7 @@
     });
 
     // Lead form — connected to Formspree
-    // REPLACE YOUR_FORM_ID below with your Formspree ID (e.g., xABCDEFG)
+    // REPLACE xdaldnwl below with your Formspree ID (e.g., xABCDEFG)
     // Get yours free at https://formspree.io
     document.getElementById('formSubmit').addEventListener('click', async function() {
       var n = document.getElementById('lead-name').value.trim();
@@ -36,7 +36,7 @@
       var c = document.getElementById('lead-company').value.trim();
       if (!n || !e) { alert('Please enter your name and email.'); return; }
       try {
-        await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        await fetch('https://formspree.io/f/xdaldnwl', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name: n, email: e, company: c })
